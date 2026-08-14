@@ -10,7 +10,6 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 
-Route::get('/googled2b39d440126e516.html');
 //home page
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/detail/{product_id}', [HomeController::class, 'detail']);
