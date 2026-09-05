@@ -5,6 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+<<<<<<< HEAD
+=======
+    <meta name="google-site-verification" content="13yCGhkx5JXxUR7cKFDNeSd-Z8NvjzMcSXP0kJIyGLI" />
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
     <title>NEXA Supply Premium</title>
      <link rel="icon" type="image/x-icon" href="{{ asset('NEXA.ico.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">

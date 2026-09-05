@@ -27,7 +27,11 @@
 
 <div class="mb-3">
     <label>รายละเอียด</label>
+<<<<<<< HEAD
     <textarea class="form-control" name="description" rows="10" placeholder="รายละเอียดสินค้า">{{ old('description', $product->description) }}</textarea>
+=======
+    <textarea class="form-control" name="description" rows="3" placeholder="รายละเอียดสินค้า">{{ old('description', $product->description) }}</textarea>
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
 </div>
 
 <div class="mb-3">
@@ -149,11 +153,15 @@
 </div>
 
 <!-- Modal เพิ่มหมวดหมู่ -->
+<<<<<<< HEAD
 <!-- แก้ไข: เดิม force เปิดด้วย class="show" + style="display:block" ตรงๆ
      ทำให้ Bootstrap ไม่มี instance ผูกกับ modal นี้ (ไม่มี backdrop, ไม่ track state)
      กดปุ่ม data-bs-dismiss="modal" (ยกเลิก) จึงไม่ทำงาน
      แก้โดยเอา force-show ออก แล้วเปิดผ่าน bootstrap.Modal จริงๆ ด้วย JS ด้านล่างแทน -->
 <div class="modal fade" id="addCategoryModal" tabindex="-1">
+=======
+<div class="modal fade @if($errors->hasBag('category')) show @endif" id="addCategoryModal" tabindex="-1" @if($errors->hasBag('category')) style="display:block" @endif>
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="/category" method="post">
@@ -165,9 +173,13 @@
         <div class="modal-body">
             <div class="mb-3">
                 <label>ชื่อหมวดหมู่</label>
+<<<<<<< HEAD
                 <input type="text" class="form-control" name="category_name" required minlength="2"
                        placeholder="เช่น เสื้อ, ร่ม, กระเป๋า"
                        value="{{ old('category_name') }}">
+=======
+                <input type="text" class="form-control" name="category_name" required minlength="2" placeholder="เช่น เสื้อ, ร่ม, กระเป๋า">
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
                 @if($errors->hasBag('category') && $errors->getBag('category')->has('category_name'))
                     <div class="text-danger small">{{ $errors->getBag('category')->first('category_name') }}</div>
                 @endif
@@ -226,6 +238,23 @@
 
 @endsection
 
+<<<<<<< HEAD
+=======
+{{-- แก้ไข: เดิมมี @section('js_before') ประกาศซ้ำอีก 2 ครั้งด้านล่าง (ว่างเปล่า)
+     ซึ่งจะเขียนทับ script ก้อนนี้ทั้งหมดจนกลายเป็นค่าว่าง ทำให้ JS ทุกอย่างในหน้านี้
+     ไม่ทำงานเลย (ปุ่มเพิ่ม attribute, เปิด modal หมวดหมู่, จัดการรูปภาพ) ได้ลบสอง
+     section ที่ซ้ำซ้อนออกแล้ว เหลือ section เดียวด้านล่างนี้เท่านั้น
+
+     นอกจากนี้ ส่วนจัดการรูปภาพเดิมยังขาดหลายจุด:
+       - ไม่ได้ประกาศตัวแปร addImageSlot, newFiles, deletedExistingIds
+       - ไม่มีฟังก์ชัน renumber() / attachDragEvents() ที่ถูกเรียกใช้จริง
+       - ไม่มีการลาก-วางเพื่อจัดเรียงลำดับ (drag & drop)
+       - ไม่มีการสร้าง hidden input (image_order[], delete_images[], primary_image_id)
+         ที่ Controller (update()) คาดหวังไว้ตอน submit ฟอร์ม
+       - รูปใหม่ที่เพิ่มใน modal ไม่เคยถูกผูกเข้ากับ input จริงที่ชื่อ images[]
+         (#main-images-input) จึงไม่ถูกส่งไปกับฟอร์มเลย
+     ทั้งหมดนี้ถูกเติมให้ครบด้านล่าง --}}
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
 @section('js_before')
 <script>
 document.getElementById('add-attribute-row').addEventListener('click', function () {
@@ -424,6 +453,7 @@ document.getElementById('applyImageChanges').addEventListener('click', function 
         previewWrap.innerHTML = '<span class="text-muted small" id="no-images-msg">ยังไม่มีรูปภาพ</span>';
     }
 });
+<<<<<<< HEAD
 
 /* ---- เปิด modal เพิ่มหมวดหมู่อัตโนมัติ เมื่อมี validation error จากการเพิ่มหมวดหมู่ ----
    เดิมใช้วิธี force class="show" + style="display:block" ใน HTML ตรงๆ
@@ -437,6 +467,8 @@ document.addEventListener('DOMContentLoaded', function () {
     ).show();
 });
 @endif
+=======
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
 </script>
 @endsection
 

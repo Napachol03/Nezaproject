@@ -475,7 +475,11 @@
             <div class="hero-eyebrow">Corporate &amp; Premium Supply</div>
             <h1>สกรีนและปักโลโก้ <em>คุณภาพระดับองค์กร</em></h1>
             <p>ผลิตสินค้าพรีเมี่ยมสำหรับองค์กร ตั้งแต่เสื้อ กระเป๋า ไปจนถึงของพรีเมี่ยมสั่งทำ
+<<<<<<< HEAD
                 โดยเฉพาะ</p>
+=======
+                โดนเฉพาะ</p>
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
             {{-- <div class="hero-actions">
 
                 <!-- LINE -->

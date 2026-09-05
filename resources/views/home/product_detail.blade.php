@@ -398,13 +398,23 @@
                 <div class="pd-desc-title">รายละเอียดสินค้า</div>
                 <p class="pd-desc">{{ $products->description ?: 'ไม่มีรายละเอียดเพิ่มเติม' }}</p>
 
+<<<<<<< HEAD
                 @if (!empty($products->attributes) && is_array($products->attributes))
                     <div class="pd-desc-title">สเปก</div>
+=======
+                <div class="pd-desc-title">สเปก</div>
+                @if (!empty($products->attributes) && is_array($products->attributes))
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
                     <p class="pd-desc">
                         @foreach ($products->attributes as $key => $value)
                             <strong>{{ $key }}:</strong> {{ $value }}<br>
                         @endforeach
                     </p>
+<<<<<<< HEAD
+=======
+                @else
+                    <p class="pd-desc">ไม่มีสเปกสินค้าเพิ่มเติม</p>
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
                 @endif
 
                 <div class="pd-actions-wrap">

@@ -21,8 +21,14 @@ Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+<<<<<<< HEAD
 
 
+=======
+//ทำไมต้องมี name('login') ?
+//เวลาใช้ auth middleware ถ้า user ยังไม่ login → Laravel จะ redirect ไปหา route ที่ชื่อว่า login โดยอัตโนมัติ
+//ถ้าไม่เจอ → มันก็โยน error Route [login] not defined.
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
 //login เสร็จไปหน้า Dashboard
 Route::middleware('auth:admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');});

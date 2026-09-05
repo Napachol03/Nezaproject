@@ -73,14 +73,26 @@
                             </h6>
 
                             <div>
+<<<<<<< HEAD
+=======
+                                <strong>User :</strong>
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
                                 {{ $row->username }}
                             </div>
 
                             <div>
+<<<<<<< HEAD
+=======
+                                <strong>Email :</strong>
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
                                 {{ $row->email }}
                             </div>
 
                             <div>
+<<<<<<< HEAD
+=======
+                                <strong>Phone :</strong>
+>>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
                                 {{ $row->phone }}
                             </div>
 
