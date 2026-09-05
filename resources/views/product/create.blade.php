@@ -21,11 +21,10 @@
 
 <div class="mb-3">
     <label>รายละเอียด</label>
-<<<<<<< HEAD
+
     <textarea class="form-control" name="description" rows="10" placeholder="รายละเอียดสินค้า">{{ old('description', $product->description ?? '') }}</textarea>
-=======
-    <textarea class="form-control" name="description" rows="3" placeholder="รายละเอียดสินค้า">{{ old('description', $product->description ?? '') }}</textarea>
->>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
+
+
     @if($errors->has('description'))
         <div class="text-danger small"> {{ $errors->first('description') }}</div>
     @endif
@@ -138,7 +137,7 @@
 </div>
 
 <!-- Modal เพิ่มหมวดหมู่ -->
-<<<<<<< HEAD
+
 <!-- แก้ไข: form นี้เดิมเป็น POST ธรรมดา -> full page reload -> ข้อมูล form สินค้าหลักหาย
      และ modal auto-reopen script (DOMContentLoaded) ทำให้ error กลางสคริปต์จนปุ่มยกเลิกกดไม่ออก
      แก้โดยเปลี่ยนเป็น AJAX submit ทั้งหมด ไม่มี reload เลย -->
@@ -146,12 +145,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <form id="categoryForm" action="/category" method="post">
-=======
+
 <div class="modal fade @if($errors->hasBag('category')) show @endif" id="addCategoryModal" tabindex="-1" @if($errors->hasBag('category')) style="display:block" @endif>
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="/category" method="post">
->>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
+
         @csrf
         <div class="modal-header">
           <h5 class="modal-title">เพิ่มหมวดหมู่ใหม่</h5>
@@ -160,16 +159,16 @@
         <div class="modal-body">
             <div class="mb-3">
                 <label>ชื่อหมวดหมู่</label>
-<<<<<<< HEAD
+
                 <input type="text" class="form-control" name="category_name" id="category_name_input"
                        required minlength="2" placeholder="เช่น เสื้อ, ร่ม, กระเป๋า">
                 <div class="text-danger small" id="category_name_error"></div>
-=======
+
                 <input type="text" class="form-control" name="category_name" required minlength="2" placeholder="เช่น เสื้อ, ร่ม, กระเป๋า">
                 @if($errors->hasBag('category') && $errors->getBag('category')->has('category_name'))
                     <div class="text-danger small">{{ $errors->getBag('category')->first('category_name') }}</div>
                 @endif
->>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
+
             </div>
         </div>
         <div class="modal-footer">
@@ -255,7 +254,6 @@ categorySelect.addEventListener('change', function () {
 });
 
 // ------------------------------------------------------------------
-<<<<<<< HEAD
 // เพิ่มหมวดหมู่ใหม่แบบ AJAX (ไม่ reload หน้า -> form สินค้าหลักไม่หาย)
 // ------------------------------------------------------------------
 const categoryForm = document.getElementById('categoryForm');

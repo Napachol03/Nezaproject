@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'NEXA Supply Premium')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-<<<<<<< HEAD
-=======
+
     <meta name="google-site-verification" content="13yCGhkx5JXxUR7cKFDNeSd-Z8NvjzMcSXP0kJIyGLI" />
->>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
     <link rel="icon" type="image/x-icon" href="{{ asset('NEXA.ico.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

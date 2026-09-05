@@ -5,11 +5,11 @@
 <div class="form-card">
     <h3>ฟอร์มแก้ไขผู้ดูแลระบบ</h3>
 
-<<<<<<< HEAD
+
 <form action="/admin/{{ $id }}" method="post" >
-=======
+
 <form action="/admin/{{ $id }}" method="post" enctype="multipart/form-data">
->>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
+
 @csrf
 @method('put')
 
@@ -83,11 +83,11 @@
 </div>
 
 <div class="d-flex gap-2 mt-2 justify-content-end">
-<<<<<<< HEAD
+
     <button type="submit" class="btn btn-submit-gradient">บันทึก</button>
-=======
+
     <button type="submit" class="btn btn-submit-gradient">บันทึกข้อมูล</button>
->>>>>>> 19bea7484cccea031972b54bada982e94bcc8b3c
+
     <a href="/admin" class="btn btn-cancel-gradient text-center">ยกเลิก</a>
 </div>
 
