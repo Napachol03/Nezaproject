@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
@@ -13,10 +14,10 @@ use App\Models\AdminModel;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:admin');
+    // }
 
     public function index()
     {
@@ -25,6 +26,7 @@ class AdminController extends Controller
             $AdminList = AdminModel::orderBy('id', 'desc')->paginate(5);
             return view('admin.list', compact('AdminList'));
         } catch (\Exception $e) {
+            Log::error('Admin index error: ' . $e->getMessage());
             return view('errors.404');
         }
     }
@@ -48,7 +50,7 @@ class AdminController extends Controller
             'email.email'             => 'รูปแบบอีเมลไม่ถูกต้อง',
             'email.unique'            => 'Email ซ้ำ',
             'phone.required'          => 'กรุณากรอกข้อมูล',
-            'phone.min'               => 'กรอกข้อมูลขั้นต่ำ :min ตัวอักษร',
+            'phone.digits'            => 'เบอร์โทรศัพท์ต้องเป็นตัวเลข :digits หลัก',
             'phone.unique'            => 'เบอร์นี้ถูกใช้แล้ว',
             'role.required'           => 'กรุณาเลือกสิทธิ์การใช้งาน',
             'avatar_url.mimes'        => 'รองรับเฉพาะ jpeg, png, jpg !!',
@@ -60,7 +62,7 @@ class AdminController extends Controller
             'username'   => 'required|min:3|unique:tbl_nexa_admin',
             'email'      => 'required|email|unique:tbl_nexa_admin',
             'password'   => 'required|min:8',
-            'phone'      => 'required|min:10|unique:tbl_nexa_admin',
+            'phone'      => 'required|digits:10|unique:tbl_nexa_admin',
             'role'       => 'required|in:super_admin,admin,staff',
             'avatar_url' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
         ], $messages);
@@ -80,7 +82,7 @@ class AdminController extends Controller
             AdminModel::create([
                 'full_name'        => strip_tags($request->full_name),
                 'username'         => strip_tags($request->username),
-                'password_hash' => bcrypt($request->password),
+                'password_hash'    => bcrypt($request->password),
                 'phone'            => strip_tags($request->phone),
                 'email'            => strip_tags($request->email),
                 'role'             => strip_tags($request->role),
@@ -92,7 +94,9 @@ class AdminController extends Controller
             Alert::success('เพิ่มข้อมูลเรียบร้อยแล้ว');
             return redirect('/admin');
         } catch (\Exception $e) {
-            return view('errors.404');
+            Log::error('Admin create error: ' . $e->getMessage());
+            Alert::error('เกิดข้อผิดพลาด: ' . $e->getMessage());
+            return redirect('admin/adding')->withInput();
         }
     }
 
@@ -100,23 +104,23 @@ class AdminController extends Controller
     {
         try {
             $admin = AdminModel::findOrFail($id);
-            if (isset($admin)) {
-                $id               = $admin->id;
-                $full_name        = $admin->full_name;
-                $username         = $admin->username;
-                $phone            = $admin->phone;
-                $email            = $admin->email;
-                $role             = $admin->role;
-                $status           = $admin->status;
-                $avatar_url       = $admin->avatar_url;
-                $is_login_allowed = $admin->is_login_allowed;
 
-                return view('admin.edit', compact(
-                    'id', 'full_name', 'username', 'phone', 'email',
-                    'role', 'status', 'avatar_url', 'is_login_allowed'
-                ));
-            }
+            $id               = $admin->id;
+            $full_name        = $admin->full_name;
+            $username         = $admin->username;
+            $phone            = $admin->phone;
+            $email            = $admin->email;
+            $role             = $admin->role;
+            $status           = $admin->status;
+            $avatar_url       = $admin->avatar_url;
+            $is_login_allowed = $admin->is_login_allowed;
+
+            return view('admin.edit', compact(
+                'id', 'full_name', 'username', 'phone', 'email',
+                'role', 'status', 'avatar_url', 'is_login_allowed'
+            ));
         } catch (\Exception $e) {
+            Log::error('Admin edit error: ' . $e->getMessage());
             return view('errors.404');
         }
     }
@@ -133,7 +137,7 @@ class AdminController extends Controller
             'email.email'         => 'รูปแบบอีเมลไม่ถูกต้อง',
             'email.unique'        => 'Email ซ้ำ',
             'phone.required'      => 'กรุณากรอกเบอร์โทรศัพท์',
-            'phone.min'           => 'กรอกข้อมูลขั้นต่ำ :min ตัวอักษร',
+            'phone.digits'        => 'เบอร์โทรศัพท์ต้องเป็นตัวเลข :digits หลัก',
             'phone.unique'        => 'เบอร์นี้ถูกใช้แล้ว',
             'role.required'       => 'กรุณาเลือกสิทธิ์การใช้งาน',
             'avatar_url.mimes'    => 'รองรับ jpeg, png, jpg เท่านั้น !!',
@@ -187,7 +191,9 @@ class AdminController extends Controller
             Alert::success('ปรับปรุงข้อมูลสำเร็จ');
             return redirect('/admin');
         } catch (\Exception $e) {
-            return view('errors.404');
+            Log::error('Admin update error (id: ' . $id . '): ' . $e->getMessage());
+            Alert::error('เกิดข้อผิดพลาด: ' . $e->getMessage());
+            return redirect('admin/' . $id)->withInput();
         }
     }
 
@@ -210,6 +216,7 @@ class AdminController extends Controller
             Alert::success('ลบข้อมูลสําเร็จ');
             return redirect('/admin');
         } catch (\Exception $e) {
+            Log::error('Admin remove error (id: ' . $id . '): ' . $e->getMessage());
             Alert::error('เกิดข้อผิดพลาด: ' . $e->getMessage());
             return redirect('/admin');
         }
@@ -219,14 +226,14 @@ class AdminController extends Controller
     {
         try {
             $admin = AdminModel::findOrFail($id);
-            if (isset($admin)) {
-                $id       = $admin->id;
-                $username = $admin->username;
-                $email    = $admin->email;
 
-                return view('admin.editPassword', compact('id', 'username', 'email'));
-            }
+            $id       = $admin->id;
+            $username = $admin->username;
+            $email    = $admin->email;
+
+            return view('admin.editPassword', compact('id', 'username', 'email'));
         } catch (\Exception $e) {
+            Log::error('Admin reset (view) error: ' . $e->getMessage());
             return view('errors.404');
         }
     }
@@ -261,7 +268,9 @@ class AdminController extends Controller
             Alert::success('ปรับปรุงข้อมูลสำเร็จ');
             return redirect('/admin');
         } catch (\Exception $e) {
-            return view('errors.404');
+            Log::error('Admin resetPassword error (id: ' . $id . '): ' . $e->getMessage());
+            Alert::error('เกิดข้อผิดพลาด: ' . $e->getMessage());
+            return redirect('admin/reset/' . $id);
         }
     }
 }

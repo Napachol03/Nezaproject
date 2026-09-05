@@ -17,10 +17,13 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         Paginator::useBootstrap();
-        ViewModel::create([
-                'product_id'          => null,
-                'view_date_timestamp' => now(),
-            ]);
+
+        // หมายเหตุ: เดิมมีการ ViewModel::create(['product_id' => null, ...])
+        // ตรงนี้ ซึ่งทำให้เกิด Integrity constraint violation เพราะ column
+        // product_id ในตาราง tbl_nexa_view เป็น NOT NULL
+        // จึงลบออก เพราะหน้า index ไม่ได้ผูกกับสินค้าตัวใดตัวหนึ่งโดยเฉพาะ
+        // ถ้าต้องการนับยอดเข้าหน้าแรก แนะนำให้สร้างตารางแยก เช่น
+        // tbl_nexa_page_view ที่ไม่ต้องมี product_id เป็น NOT NULL
 
         $query = ProductModel::where('is_active', true)
             ->orderBy('product_id', 'desc');

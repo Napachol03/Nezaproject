@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ViewModel extends Model
 {
-    protected $table = 'tbl_nexa_view'; // ⚠️ เปลี่ยนชื่อนี้ให้ตรงกับตารางจริงในฐานข้อมูลของคุณ
+    protected $table = 'tbl_nexa_view';
 
     protected $primaryKey = 'view_id';
 
@@ -16,8 +16,7 @@ class ViewModel extends Model
 
     protected $fillable = [
         'product_id',
-        'view_date_timestamp	
-',
+        'viewed_at',
     ];
 
     protected $casts = [

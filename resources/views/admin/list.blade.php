@@ -73,17 +73,14 @@
                             </h6>
 
                             <div>
-                                <strong>User :</strong>
                                 {{ $row->username }}
                             </div>
 
                             <div>
-                                <strong>Email :</strong>
                                 {{ $row->email }}
                             </div>
 
                             <div>
-                                <strong>Phone :</strong>
                                 {{ $row->phone }}
                             </div>
 
